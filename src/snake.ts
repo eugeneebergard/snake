@@ -15,7 +15,7 @@ interface IApple extends ICoordinates {}
 const score = <HTMLElement>document.getElementById('score');
 const canvas = <HTMLCanvasElement>document.getElementById('game');
 const bordersBtn = <HTMLButtonElement>document.getElementById('borders-btn');
-const bordersStateDisplay = <HTMLElement>document.getElementById('state-borders')
+const bordersStateDisplay = <HTMLElement>document.getElementById('state-borders');
 const context = <CanvasRenderingContext2D>canvas.getContext('2d');
 
 const grid: number = 16;
@@ -40,6 +40,41 @@ const apple: IApple = {
 
 function getRandomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function createApple(): void {
+  apple.x = getRandomInt(0, 25) * grid;
+  apple.y = getRandomInt(0, 25) * grid;
+}
+
+function restart(): void {
+  snake.x = 160;
+  snake.y = 160;
+  snake.cells = [];
+  snake.maxCells = 4;
+  snake.dx = grid;
+  snake.dy = 0;
+
+  applesEaten = 0;
+  score.textContent = applesEaten.toString();
+
+  createApple();
+}
+
+function toggleBorders() {
+  stateBorders = !stateBorders;
+
+  if (stateBorders) {
+    bordersStateDisplay.textContent = 'on';
+    canvas.classList.add('borders_on');
+    canvas.classList.remove('borders_off');
+  } else {
+    bordersStateDisplay.textContent = 'off';
+    canvas.classList.add('borders_off');
+    canvas.classList.remove('borders_on');
+  }
+
+  restart();
 }
 
 function loop(): void {
@@ -86,25 +121,6 @@ function loop(): void {
       }
     }
   });
-}
-
-function restart(): void {
-  snake.x = 160;
-  snake.y = 160;
-  snake.cells = [];
-  snake.maxCells = 4;
-  snake.dx = grid;
-  snake.dy = 0;
-
-  applesEaten = 0;
-  score.textContent = applesEaten.toString();
-
-  createApple();
-}
-
-function createApple(): void {
-  apple.x = getRandomInt(0, 25) * grid;
-  apple.y = getRandomInt(0, 25) * grid;
 }
 
 document.addEventListener('keydown', (e) => {
@@ -154,26 +170,8 @@ document.addEventListener('keyup', (e) => {
   }
 });
 
-bordersBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+bordersBtn.addEventListener('click', () => {
   toggleBorders()
 });
 
-function toggleBorders() {
-  stateBorders = !stateBorders;
-
-  if (stateBorders) {
-    bordersStateDisplay.textContent = 'on';
-    canvas.classList.add('borders_on');
-    canvas.classList.remove('borders_off');
-  } else {
-    bordersStateDisplay.textContent = 'off';
-    canvas.classList.add('borders_off');
-    canvas.classList.remove('borders_on');
-  }
-
-  restart();
-}
-
 requestAnimationFrame(loop);
-

@@ -24,6 +24,35 @@ const apple = {
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
+function createApple() {
+    apple.x = getRandomInt(0, 25) * grid;
+    apple.y = getRandomInt(0, 25) * grid;
+}
+function restart() {
+    snake.x = 160;
+    snake.y = 160;
+    snake.cells = [];
+    snake.maxCells = 4;
+    snake.dx = grid;
+    snake.dy = 0;
+    applesEaten = 0;
+    score.textContent = applesEaten.toString();
+    createApple();
+}
+function toggleBorders() {
+    stateBorders = !stateBorders;
+    if (stateBorders) {
+        bordersStateDisplay.textContent = 'on';
+        canvas.classList.add('borders_on');
+        canvas.classList.remove('borders_off');
+    }
+    else {
+        bordersStateDisplay.textContent = 'off';
+        canvas.classList.add('borders_off');
+        canvas.classList.remove('borders_on');
+    }
+    restart();
+}
 function loop() {
     requestAnimationFrame(loop);
     if (++count < gameSpeed)
@@ -59,21 +88,6 @@ function loop() {
             }
         }
     });
-}
-function restart() {
-    snake.x = 160;
-    snake.y = 160;
-    snake.cells = [];
-    snake.maxCells = 4;
-    snake.dx = grid;
-    snake.dy = 0;
-    applesEaten = 0;
-    score.textContent = applesEaten.toString();
-    createApple();
-}
-function createApple() {
-    apple.x = getRandomInt(0, 25) * grid;
-    apple.y = getRandomInt(0, 25) * grid;
 }
 document.addEventListener('keydown', (e) => {
     switch (e.which) {
@@ -114,23 +128,8 @@ document.addEventListener('keyup', (e) => {
         gameSpeed = 4;
     }
 });
-bordersBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+bordersBtn.addEventListener('click', () => {
     toggleBorders();
 });
-function toggleBorders() {
-    stateBorders = !stateBorders;
-    if (stateBorders) {
-        bordersStateDisplay.textContent = 'on';
-        canvas.classList.add('borders_on');
-        canvas.classList.remove('borders_off');
-    }
-    else {
-        bordersStateDisplay.textContent = 'off';
-        canvas.classList.add('borders_off');
-        canvas.classList.remove('borders_on');
-    }
-    restart();
-}
 requestAnimationFrame(loop);
 //# sourceMappingURL=snake.js.map
