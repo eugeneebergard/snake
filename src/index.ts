@@ -1,16 +1,16 @@
 import { ISnake, IApple } from "./snake.types";
 
-const score = <HTMLElement>document.getElementById('score');
 const canvas = <HTMLCanvasElement>document.getElementById('game');
-const bordersBtn = <HTMLButtonElement>document.getElementById('borders-btn');
-const bordersStateDisplay = <HTMLElement>document.getElementById('state-borders');
 const context = <CanvasRenderingContext2D>canvas.getContext('2d');
+const scoreCounter = <HTMLElement>document.getElementById('score__counter');
+const modeButton = <HTMLButtonElement>document.getElementById('mode');
+const stateModeButton = <HTMLElement>document.getElementById('mode__state');
 
 const grid: number = 16;
 let count: number = 0;
 let gameSpeed: number = 4;
 let applesEaten: number = 0;
-let stateBorders: boolean = false;
+let modeWithBorders: boolean = false;
 
 const snake: ISnake = {
   x: 160,
@@ -44,23 +44,23 @@ function restart(): void {
   snake.dy = 0;
 
   applesEaten = 0;
-  score.textContent = applesEaten.toString();
+  scoreCounter.textContent = applesEaten.toString();
 
   createApple();
 }
 
-function toggleBorders() {
-  stateBorders = !stateBorders;
+function redrawGame(text: string, addClass: string, removeClass: string): void {
+  stateModeButton.textContent = text;
+  canvas.classList.add(addClass);
+  canvas.classList.remove(removeClass);
+}
 
-  if (stateBorders) {
-    bordersStateDisplay.textContent = 'on';
-    canvas.classList.add('borders_on');
-    canvas.classList.remove('borders_off');
-  } else {
-    bordersStateDisplay.textContent = 'off';
-    canvas.classList.add('borders_off');
-    canvas.classList.remove('borders_on');
-  }
+function toggleBorders() {
+  modeWithBorders = !modeWithBorders;
+
+  modeWithBorders ?
+    redrawGame('on', 'borders_on', 'borders_off'):
+    redrawGame('off', 'borders_off', 'borders_on');
 
   restart();
 }
@@ -77,11 +77,11 @@ function loop(): void {
   snake.x += snake.dx;
   snake.y += snake.dy;
 
-  if (snake.x < 0) stateBorders ? restart() : snake.x = canvas.width - grid;
-  else if (snake.x >= canvas.width) stateBorders ? restart() : snake.x = 0;
+  if (snake.x < 0) modeWithBorders ? restart() : snake.x = canvas.width - grid;
+  else if (snake.x >= canvas.width) modeWithBorders ? restart() : snake.x = 0;
 
-  if (snake.y < 0) stateBorders ? restart() : snake.y = canvas.height - grid;
-  else if (snake.y >= canvas.height) stateBorders ? restart() : snake.y = 0;
+  if (snake.y < 0) modeWithBorders ? restart() : snake.y = canvas.height - grid;
+  else if (snake.y >= canvas.height) modeWithBorders ? restart() : snake.y = 0;
 
   snake.cells.unshift({ x: snake.x, y: snake.y });
 
@@ -101,7 +101,7 @@ function loop(): void {
       createApple();
 
       applesEaten++;
-      score.textContent = applesEaten.toString();
+      scoreCounter.textContent = applesEaten.toString();
     }
     for (let i = index + 1; i < snake.cells.length; i++) {
       if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
@@ -158,8 +158,8 @@ document.addEventListener('keyup', (e) => {
   }
 });
 
-bordersBtn.addEventListener('click', () => {
-  toggleBorders()
+modeButton.addEventListener('click', () => {
+  toggleBorders();
 });
 
 requestAnimationFrame(loop);
