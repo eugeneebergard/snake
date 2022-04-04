@@ -1,16 +1,4 @@
-interface ICoordinates {
-  x: number,
-  y: number
-}
-
-interface ISnake extends ICoordinates {
-  dx: number,
-  dy: number,
-  cells: ICoordinates[],
-  maxCells: number,
-}
-
-interface IApple extends ICoordinates {}
+import { ISnake, IApple } from "./snake.types";
 
 const score = <HTMLElement>document.getElementById('score');
 const canvas = <HTMLCanvasElement>document.getElementById('game');
