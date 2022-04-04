@@ -125,14 +125,14 @@ function loop(): void {
 
 document.addEventListener('keydown', (e) => {
   switch (e.which){
+    case 16:
+      // Shift
+      gameSpeed = 2;
+      break;
     case 27:
       // Escape
       restart();
       break
-    case 32:
-      // Space
-      gameSpeed = 2;
-      break;
     case 37:
       // Стрелка влево
       if (snake.dx === 0) {
@@ -165,7 +165,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('keyup', (e) => {
-  if(e.which === 32) {
+  if(e.which === 16) {
     gameSpeed = 4;
   }
 });

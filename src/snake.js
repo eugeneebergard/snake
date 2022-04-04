@@ -91,11 +91,11 @@ function loop() {
 }
 document.addEventListener('keydown', (e) => {
     switch (e.which) {
+        case 16:
+            gameSpeed = 2;
+            break;
         case 27:
             restart();
-            break;
-        case 32:
-            gameSpeed = 2;
             break;
         case 37:
             if (snake.dx === 0) {
@@ -124,7 +124,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 document.addEventListener('keyup', (e) => {
-    if (e.which === 32) {
+    if (e.which === 16) {
         gameSpeed = 4;
     }
 });
