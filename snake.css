@@ -1,0 +1,49 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Andale Mono, monospace;
+    color: white;
+}
+
+body {
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.borders_on {
+    border: 1px solid white;
+}
+
+.borders_off {
+    border: 1px dashed white;
+}
+
+.heading {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.score-container {
+    color: white;
+}
+
+.button {
+    font-family: Andale Mono, monospace;;
+    background-color: #000;
+    border: 1px solid white;
+    color: white;
+    width: 140px;
+    outline: none;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}

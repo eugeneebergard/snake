@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake</title>
+    <link rel="icon" href="../static/snake.png" type = "image/x-icon">
+    <link rel="stylesheet" href="./snake.css">
+    <script src="./bundle.js" defer></script>
+</head>
+
+<body>
+    <div class="heading">
+        <h2 class="score-container">Score: <span id="score">0</span></h2>
+        <button class="button" id="borders-btn">Borders: <span id="state-borders">off</span></button>
+    </div>
+    <canvas class="borders_off" id="game" width="400" height="400"></canvas>
+    <div>
+        <h3>Hold "Shift" to Speed Up</h3>
+        <h3>Press "Esc" to Restart</h3>
+    </div>
+</body>
+</html>
