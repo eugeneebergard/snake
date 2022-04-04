@@ -14,14 +14,6 @@ body {
     justify-content: center;
 }
 
-.borders_on {
-    border: 1px solid white;
-}
-
-.borders_off {
-    border: 1px dashed white;
-}
-
 .heading {
     width: 400px;
     display: flex;
@@ -29,7 +21,7 @@ body {
     align-items: center;
 }
 
-.score-container {
+.score {
     color: white;
 }
 
@@ -46,4 +38,12 @@ body {
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+}
+
+.borders_on {
+    border: 1px solid white;
+}
+
+.borders_off {
+    border: 1px dashed white;
 }
