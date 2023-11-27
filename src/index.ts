@@ -5,6 +5,8 @@ const context = <CanvasRenderingContext2D>canvas.getContext('2d');
 const scoreCounter = <HTMLElement>document.getElementById('score__counter');
 const modeButton = <HTMLButtonElement>document.getElementById('mode');
 const stateModeButton = <HTMLElement>document.getElementById('mode__state');
+const bestResult = <HTMLElement>document.getElementById('score__result');
+console.log(bestResult.textContent);
 
 const grid: number = 16;
 let count: number = 0;
@@ -12,7 +14,7 @@ let gameSpeed: number = 4;
 let applesEaten: number = 0;
 let modeWithBorders: boolean = false;
 
-const snake: ISnake = {
+const snake: ISnake = { // координаты змейки
   x: 160,
   y: 160,
   dx: grid,
@@ -21,7 +23,7 @@ const snake: ISnake = {
   maxCells: 4
 }
 
-const apple: IApple = {
+const apple: IApple = { // координаты яблока
   x: 320,
   y: 320
 }
@@ -33,6 +35,13 @@ function getRandomInt(min: number, max: number): number {
 function createApple(): void {
   apple.x = getRandomInt(0, 25) * grid;
   apple.y = getRandomInt(0, 25) * grid;
+}
+
+// запомнить результат
+function rememberResult(result: number) {
+  if (bestResult !== null && result > Number(bestResult.textContent)) {
+    bestResult.textContent = String(result);
+  }
 }
 
 function restart(): void {
@@ -105,6 +114,7 @@ function loop(): void {
     }
     for (let i = index + 1; i < snake.cells.length; i++) {
       if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+        rememberResult(Number(scoreCounter.textContent));
         restart();
       }
     }

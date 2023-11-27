@@ -36,6 +36,10 @@ body {
     color: white;
 }
 
+.score-best {
+    font-size: 12px;
+}
+
 .button {
     font-family: 'Press Start 2P', Arial, sans-serif;
     font-size: 12px;
