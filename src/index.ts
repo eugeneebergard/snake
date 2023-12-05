@@ -1,4 +1,5 @@
-import { ISnake, IApple } from "./snake.types";
+import './index.css';
+import { ISnake, IApple } from './snake.types';
 
 const canvas = <HTMLCanvasElement>document.getElementById('game');
 const context = <CanvasRenderingContext2D>canvas.getContext('2d');
@@ -6,7 +7,6 @@ const scoreCounter = <HTMLElement>document.getElementById('score__counter');
 const modeButton = <HTMLButtonElement>document.getElementById('mode');
 const stateModeButton = <HTMLElement>document.getElementById('mode__state');
 const bestResult = <HTMLElement>document.getElementById('score__result');
-console.log(bestResult.textContent);
 
 const grid: number = 16;
 let count: number = 0;
