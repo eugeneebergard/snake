@@ -5,14 +5,10 @@ const FileManagerPlugin = require("filemanager-webpack-plugin");
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.ts'),
-
-  devtool: 'inline-source-map',
-
   output: {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
   },
-
   module: {
     rules: [
       {
@@ -31,14 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { importLoaders: 1 }
-          },
-          'postcss-loader'
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(png|jpg|jpeg|gif|webp)$/i,
@@ -62,7 +51,6 @@ module.exports = {
       }
     ],
   },
-
   plugins: [
     new MiniCssExtractPlugin({
       filename:  'style.[contenthash].css',

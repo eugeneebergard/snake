@@ -123,45 +123,49 @@ function loop(): void {
 }
 
 document.addEventListener('keydown', (e) => {
-  switch (e.key){
-    case 'Shift':
+  switch (e.code){
+    case 'ShiftLeft':
       gameSpeed = gameSpeed / 2;
       break;
     case 'Escape':
       restart();
       break
     case 'ArrowLeft':
+    case 'KeyA':
       if (snake.dx === 0) {
         snake.dx = -grid;
         snake.dy = 0;
       }
       break;
     case 'ArrowUp':
+    case 'KeyW':
       if (snake.dy === 0) {
         snake.dy = -grid;
         snake.dx = 0;
       }
       break;
     case 'ArrowRight':
+    case 'KeyD':
       if (snake.dx === 0) {
         snake.dx = grid;
         snake.dy = 0;
       }
       break;
     case 'ArrowDown':
+    case 'KeyS':
       if (snake.dy === 0) {
         snake.dy = grid;
         snake.dx = 0;
       }
       break;
-    case 't':
+    case 'KeyT':
       toggleBorders()
       break;
   }
 });
 
 document.addEventListener('keyup', (e) => {
-  if (e.key === 'Shift') gameSpeed = gameSpeed * 2;
+  if (e.code === 'ShiftLeft') gameSpeed = gameSpeed * 2;
 });
 
 modeButton.addEventListener('click', () => {
