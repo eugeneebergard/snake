@@ -1,7 +1,7 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FileManagerPlugin = require("filemanager-webpack-plugin");
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.ts'),
@@ -26,8 +26,15 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        test: /\.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
+          },
+          'postcss-loader'
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|webp)$/i,
