@@ -125,7 +125,7 @@ function loop(): void {
 document.addEventListener('keydown', (e) => {
   switch (e.code){
     case 'ShiftLeft':
-      gameSpeed = gameSpeed / 2;
+      gameSpeed = 2;
       break;
     case 'Escape':
       restart();
@@ -165,7 +165,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('keyup', (e) => {
-  if (e.code === 'ShiftLeft') gameSpeed = gameSpeed * 2;
+  if (e.code === 'ShiftLeft') gameSpeed = 4;
 });
 
 modeButton.addEventListener('click', () => {
