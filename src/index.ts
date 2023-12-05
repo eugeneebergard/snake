@@ -3,15 +3,16 @@ import { ISnake, IApple } from './snake.types';
 
 const canvas = <HTMLCanvasElement>document.getElementById('game');
 const context = <CanvasRenderingContext2D>canvas.getContext('2d');
-const scoreCounter = <HTMLElement>document.getElementById('score__counter');
+const scoreCounter = <HTMLElement>document.getElementById('counter');
+const bestScore = <HTMLElement>document.getElementById('best-score');
 const modeButton = <HTMLButtonElement>document.getElementById('mode');
-const stateModeButton = <HTMLElement>document.getElementById('mode__state');
-const bestResult = <HTMLElement>document.getElementById('score__result');
+const stateModeButton = <HTMLElement>document.getElementById('borders');
 
 const grid: number = 16;
 let count: number = 0;
 let gameSpeed: number = 4;
 let applesEaten: number = 0;
+let topResult: number = 0;
 let modeWithBorders: boolean = false;
 
 const snake: ISnake = { // координаты змейки
@@ -38,13 +39,14 @@ function createApple(): void {
 }
 
 // запомнить результат
-function rememberResult(result: number) {
-  if (bestResult !== null && result > Number(bestResult.textContent)) {
-    bestResult.textContent = String(result);
-  }
+function updateBestResult(result: number) {
+  bestScore.textContent = String(result);
+  topResult = result;
 }
 
 function restart(): void {
+  topResult < applesEaten && updateBestResult(applesEaten);
+
   snake.x = 160;
   snake.y = 160;
   snake.cells = [];
@@ -114,7 +116,6 @@ function loop(): void {
     }
     for (let i = index + 1; i < snake.cells.length; i++) {
       if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-        rememberResult(Number(scoreCounter.textContent));
         restart();
       }
     }
@@ -122,50 +123,45 @@ function loop(): void {
 }
 
 document.addEventListener('keydown', (e) => {
-  switch (e.which){
-    case 16:
-      // Shift
+  switch (e.key){
+    case 'Shift':
       gameSpeed = 2;
       break;
-    case 27:
-      // Escape
+    case 'Escape':
       restart();
       break
-    case 37:
-      // Стрелка влево
+    case 'ArrowLeft':
       if (snake.dx === 0) {
         snake.dx = -grid;
         snake.dy = 0;
       }
       break;
-    case 38:
-      // Стрелка вверх
+    case 'ArrowUp':
       if (snake.dy === 0) {
         snake.dy = -grid;
         snake.dx = 0;
       }
       break;
-    case 39:
-      // Стрелка вправо
+    case 'ArrowRight':
       if (snake.dx === 0) {
         snake.dx = grid;
         snake.dy = 0;
       }
       break;
-    case 40:
-      // Стрелка вниз
+    case 'ArrowDown':
       if (snake.dy === 0) {
         snake.dy = grid;
         snake.dx = 0;
       }
       break;
+    case 't':
+      toggleBorders()
+      break;
   }
 });
 
 document.addEventListener('keyup', (e) => {
-  if(e.which === 16) {
-    gameSpeed = 4;
-  }
+  if (e.key === 'Shift') gameSpeed = 4;
 });
 
 modeButton.addEventListener('click', () => {

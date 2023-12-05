@@ -9,15 +9,16 @@
 </head>
 <body>
     <div class="heading">
-        <div class="score-container">
-          <h2 class="score">Score:<span id="score__counter">0</span></h2>
-          <h3 class="score score-best">Best result: <span id="score__result">0</span></h3>
+        <div class="score">
+          <h2 class="score__counter">Score:<span id="counter">0</span></h2>
+          <h3 class="score__best-result">Best result: <span id="best-score">0</span></h3>
         </div>
-        <button type="button" class="button" id="mode">Borders: <span id="mode__state">off</span></button>
+        <button type="button" class="button" id="mode">Borders: <span id="borders">off</span></button>
     </div>
     <canvas class="borders_off" id="game" width="400" height="400"></canvas>
     <div class="control">
         <h3>Hold "Shift" to Speed Up</h3>
+        <h3>Press "T" to Toggle Borders</h3>
         <h3>Press "Est" to Restart</h3>
     </div>
 </body>

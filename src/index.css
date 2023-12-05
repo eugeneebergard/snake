@@ -25,7 +25,6 @@ body {
 
 .heading {
     width: 400px;
-    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,7 +35,7 @@ body {
     color: white;
 }
 
-.score-best {
+.score__best-result {
     font-size: 12px;
 }
 
