@@ -122,6 +122,8 @@ function loop(): void {
   });
 }
 
+// Вот тут я добавил код
+
 document.addEventListener('keydown', (e) => {
   switch (e.key){
     case 'Shift':
